@@ -1,58 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>
-      Movie!!!!!!!
-    </title>
-    <style media="screen">
-      #first{
-        width: 200px;
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    Movie!!!!!!!
+  </title>
+  <style media="screen">
+    #first{
+        width: 400px;
         display: inline-block;
       }
       #second{
-        width: 200px;
+        width: 400px;
         display: inline-block;
         clear: both;
       }
       #third{
-        width: 200px;
+        width: 400px;
         display: inline-block;
       }
       #nextpage{
         display: block;
       }
+      .poster{
+        width: 300px;
+        height: 400px;
+
+      }
     </style>
-  </head>
-  <body>
-    <header>
-      <h1>Movie Choice!</h1>
-    </header>
-    <div id="lights">
+</head>
+
+<body>
+  <header>
+    <h1>Movie Choice!</h1>
+  </header>
+  <div id="lights">
+    <form class="" action="hue_controller.html" method="get">
       <div id="first">
         <h2>movie 1</h2>
-        <form class="" action="hue_controller.html" method="get">
-          <input type="image" name="1" id="movie1">
-          <input type="checkbox" name="1">
-        </form>
+        <input class="poster" type="image" name="1" id="movie1" src="./보헤미안 랩소디.jpg">
+        <input type="radio" name="movie">
       </div>
       <div id="second">
         <h2>movie 2</h2>
-        <form class="" action="hue_controller.html" method="get">
-          <input type="image" name="2" id="movie2">
-          <input type="checkbox" name="2">
-        </form>
+        <input class="poster" type="image" name="2" id="movie2" src="./신비한 동물사전.jpeg">
+        <input type="radio" name="movie">
       </div>
       <div id="third">
         <h2>movie 3</h2>
-        <form class="" action="hue_controller.html" method="get">
-          <input type="image" name="3" id="movie3">
-          <input type="checkbox" name="3">
-        </form>
+        <input class="poster" type="image" name="3" id="movie3" src="./완벽한 타인.jpg">
+        <input type="radio" name="movie">
       </div>
-    <form id="nextpage">
       <input type="submit" value="submit">
     </form>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
