@@ -4,26 +4,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> Movie!!!!!!!</title>
+<title>  Movie!!!!!!!</title>
+</head>
 <style media="screen">
-      #first{
-        width: 200px;
+    #first{
         display: inline-block;
       }
     </style>
-</head>
 <body>
-  <header>
-      <h1>MOVIE Theater</h1>
-    </header>
-    <div id="lights">
-      <div id="first">
-        <h2>theater 1</h2>
-        <form class="" action="Cinema.jsp" method="get">
-          <input type="radio" name="1">Theater1
-          <input type="submit" value="상영관 선택 화면으로">
-        </form>
-      </div>
+
+    <h1>MOVIE Theater</h1>
+
+  <div id="lights">
+    <div id="first">
+      <h2>Theater</h2>
+      <form class="radios" action="TimeTable.jsp" method="get">
+        <input type="radio" name="1">Theater 1
+        <input type="radio" name="1">Theater 2
+        <input type="radio" name="1">Theater 3
+        <input type="radio" name="1">Theater 4
+        <input type="radio" name="1">Theater 5
+        <input type="radio" name="1">Theater 6
+        <input type="radio" name="1">Theater 7
+        <input type="radio" name="1">Theater 8
+        <input type="radio" name="1">Theater 9
+        <input type="radio" name="1">Theater 10
+        <input type="submit" value="시간표 선택 화면으로">
+      </form>
     </div>
+  </div>
 </body>
 </html>

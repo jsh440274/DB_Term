@@ -3,6 +3,7 @@
 
 <%@ page import="java.sql.*"%>
 <%@ page import="login.LogonDBBean"%>
+<%@ page import="login.LogonDataBean"%>
 
 <%--  <% request.setCharacterEncoding("euc-kr"); --%>
 
@@ -11,36 +12,27 @@
 </jsp:useBean>
 
 <%
-	String id = request.getParameter("id");
-	String passwd = request.getParameter("passwd");
-
+	//String id = request.getParameter("id");
+	String id = (String)session.getAttribute("sessionID"); 
 	LogonDBBean logon = LogonDBBean.getInstance();
-	int check = logon.deleteMember(id, passwd);
-
-	if (check == 1) {
+	int check = logon.updateMember(member, id);
+	member.setId(id);
+	
+	if(check ==1) {
 %>
-<jsp:getProperty property="id" name="member" />님이 탈퇴를 하였습니다.
+
+<jsp:getProperty property="id" name="member" />님 회원정보가 수정되었습니다.
 <form method="post">
 	<input type="button" value="로그인화면으로 이동하기"
 		onclick="location.href='loginForm.jsp'">
 </form>
 <%
-	} else if(check == 0){
+	} else if(check == -1){
 %>
 <script>
-	alert("비밀번호가 맞지 않습니다.");
-	history.go(-1);
-</script>
-<%
-	} else{
-%>
-<script>
-	alert("아이디가 존재하지 않습니다.");
+	alert("실패했습니다.");
 	history.go(-1);
 </script>
 <%
 	}
 %>
-
-
-

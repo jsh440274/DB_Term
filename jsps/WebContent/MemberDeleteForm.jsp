@@ -10,9 +10,9 @@
 
 <h2>회원탈퇴</h2>
 
-    <form name="DeleteMemberForm.jsp" method="post" action="DeleteMemberPro.jsp">
-    	아이디 : <input type="text" name="id" maxlength="!2"><br/>
-                  패스워드 : <input type="password" name="passwd" maxlength="12"><br/>
+    <form method="post" action="MemberDeletePro.jsp">
+    	아이디 : <input type="text" name="id"><br/>
+                  패스워드 : <input type="password" name="passwd"><br/>
         <input type="button" value="취소" onclick="location.href='cookieMain.jsp'">
         <input type="submit" value="탈퇴" /> 
     </form>

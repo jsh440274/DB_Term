@@ -10,6 +10,7 @@
     int check= logon.userCheck(id,passwd);
 
  if(check==1){
+  session.setAttribute("sessionID", id);
   Cookie cookie = new Cookie("id", id);
   cookie.setMaxAge(20*60);
   response.addCookie(cookie);

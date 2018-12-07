@@ -2,6 +2,8 @@ package login;
 
 import java.sql.*;
 
+import movie.MovieDataBean;
+
 public class LogonDBBean {
 
 	private static LogonDBBean instance = new LogonDBBean();
@@ -176,7 +178,7 @@ public class LogonDBBean {
 				// 자바빈에 정보를 담는다.
 				logondata = new LogonDataBean();
 				logondata.setId(rs.getString("id"));
-				logondata.setPasswd(rs.getString("password"));
+				logondata.setPasswd(rs.getString("passwd"));
 				logondata.setName(rs.getString("name"));
 				logondata.setBirthday(rs.getString("birthday"));
 				logondata.setAddress(rs.getString("address"));
@@ -248,5 +250,45 @@ public class LogonDBBean {
 				}
 		}
 		return x;
+	}
+
+	public void insertMovie(MovieDataBean movie) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		// 아이디 패스워드 이름 생년월일 주소 전화번호
+
+		try {
+			conn = getConnection();
+
+			pstmt = conn.prepareStatement("insert into movie values(?, ?, ?, ?, ?, ?, ?, ?)");
+			pstmt.setString(1, movie.getMovie_id());
+			pstmt.setString(2, movie.getMovie_title());
+			pstmt.setString(3, movie.getMovie_director());
+			pstmt.setString(4, movie.getMovie_actor());
+			pstmt.setString(5, movie.getMovie_rating());
+			pstmt.setString(6, movie.getMovie_info());
+			pstmt.setInt(7, movie.getMovie_reservation_rate());
+			pstmt.setInt(8, movie.getMovie_runtime());
+			pstmt.setInt(9, movie.getTheater_num());
+			pstmt.setString(9, movie.getTheater_date());
+			pstmt.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+		}
+	}
+	
+	public void nullvoid() {
+		
 	}
 }
