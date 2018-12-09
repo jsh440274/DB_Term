@@ -7,163 +7,58 @@ public class LogonDataBean {
 	// MemberBean.java
 	
 	//Login
-	private String id;
-	private String passwd;
-	private String name;
-	private String birthday;
-	private String address;
-	private String tel;
-	private Timestamp reg_date;
+	private String customer_id;
+	private String customer_pw;
+	private String customer_name;
+	private int customer_birth;
+	private int customer_tel;
+	private int customer_point;
+	private int customer_count;
 	
-
-	public String getId() {
-		return id;
+	public String getCustomer_id() {
+		return customer_id;
 	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setCustomer_id(String customer_id) {
+		this.customer_id = customer_id;
 	}
-
-	public String getPasswd() {
-		return passwd;
+	public String getCustomer_pw() {
+		return customer_pw;
 	}
-
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setCustomer_pw(String customer_pw) {
+		this.customer_pw = customer_pw;
 	}
-
-	public String getName() {
-		return name;
+	public String getCustomer_name() {
+		return customer_name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
 	}
-
-	public String getBirthday() {
-		return birthday;
+	public int getCustomer_birth() {
+		return customer_birth;
 	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setCustomer_birth(int customer_birth) {
+		this.customer_birth = customer_birth;
 	}
-
-	public String getAddress() {
-		return address;
+	public int getCustomer_tel() {
+		return customer_tel;
 	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setCustomer_tel(int customer_tel) {
+		this.customer_tel = customer_tel;
 	}
-
-	public String getTel() {
-		return tel;
+	public int getCustomer_point() {
+		return customer_point;
 	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setCustomer_point(int customer_point) {
+		this.customer_point = customer_point;
 	}
-
-	public Timestamp getReg_date() {
-		return reg_date;
+	public int getCustomer_count() {
+		return customer_count;
 	}
-
-	public void setReg_date(Timestamp reg_date) {
-		this.reg_date = reg_date;
+	public void setCustomer_count(int customer_count) {
+		this.customer_count = customer_count;
 	}
 	
 
-	//Movie
-	private String movie_id;
-	private String movie_title;
-	private String movie_director;
-	private String movie_actor;
-	private String movie_rating;
-	private String movie_info;
-	private int movie_reservation_rate;
-	private int movie_runtime;
-	private int theater_num;
-	private String theater_date;
-
-	public String getMovie_id() {
-		return movie_id;
-	}
-
-	public void setMovie_id(String movie_id) {
-		this.movie_id = movie_id;
-	}
-
-	public String getMovie_title() {
-		return movie_title;
-	}
-
-	public void setMovie_title(String movie_title) {
-		this.movie_title = movie_title;
-	}
-
-	public String getMovie_director() {
-		return movie_director;
-	}
-
-	public void setMovie_director(String movie_director) {
-		this.movie_director = movie_director;
-	}
-
-	public String getMovie_actor() {
-		return movie_actor;
-	}
-
-	public void setMovie_actor(String movie_actor) {
-		this.movie_actor = movie_actor;
-	}
-
-	public String getMovie_rating() {
-		return movie_rating;
-	}
-
-	public void setMovie_rating(String movie_rating) {
-		this.movie_rating = movie_rating;
-	}
-
-	public String getMovie_info() {
-		return movie_info;
-	}
-
-	public void setMovie_info(String movie_info) {
-		this.movie_info = movie_info;
-	}
-
-	public int getMovie_reservation_rate() {
-		return movie_reservation_rate;
-	}
-
-	public void setMovie_reservation_rate(int movie_reservation_rate) {
-		this.movie_reservation_rate = movie_reservation_rate;
-	}
-
-	public int getMovie_runtime() {
-		return movie_runtime;
-	}
-
-	public void setMovie_runtime(int movie_runtime) {
-		this.movie_runtime = movie_runtime;
-	}
-
-	public int getTheater_num() {
-		return theater_num;
-	}
-
-	public void setTheater_num(int theater_num) {
-		this.theater_num = theater_num;
-	}
-
-	public String getTheater_date() {
-		return theater_date;
-	}
-
-	public void setTheater_date(String theater_date) {
-		this.theater_date = theater_date;
-	}
 
 }
 	

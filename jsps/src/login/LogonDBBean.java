@@ -28,22 +28,24 @@ public class LogonDBBean {
 		return conn;
 	}
 
-	// MemberDAO.java
-	public void insertMember(LogonDataBean member) throws Exception {
+	// customerDao.java
+	public void insertMember(LogonDataBean customer) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		// 아이디 패스워드 이름 생년월일 주소 전화번호
 		try {
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("insert into member values(?, ?, ?, ?, ?, ?)");
-			pstmt.setString(1, member.getId());
-			pstmt.setString(2, member.getPasswd());
-			pstmt.setString(3, member.getName());
-			pstmt.setString(4, member.getBirthday());
-			pstmt.setString(5, member.getAddress());
-			pstmt.setString(6, member.getTel());
+			pstmt = conn.prepareStatement("insert into customer values(?, ?, ?, ?, ?, ?, ?)");
+			pstmt.setString(1, customer.getCustomer_id());
+			pstmt.setString(2, customer.getCustomer_pw());
+			pstmt.setString(3, customer.getCustomer_name());
+			pstmt.setInt(4, customer.getCustomer_birth());
+			pstmt.setInt(5, customer.getCustomer_tel());
+			pstmt.setInt(6, 0);
+			pstmt.setInt(7, 0);
 			pstmt.executeUpdate();
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -64,26 +66,25 @@ public class LogonDBBean {
 
 	}
 
-	public int updateMember(LogonDataBean member, String id) throws Exception {
+	public int updateCustomer(LogonDataBean customer, String customer_id) throws Exception {
 		int x = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			conn = getConnection();
-			pstmt = conn
-					.prepareStatement("UPDATE member SET PASSWD=?, NAME=?, BIRTHDAY=?, ADDRESS=?, TEL=?  WHERE ID=?");
-			pstmt.setString(1, member.getPasswd());
-			pstmt.setString(2, member.getName());
-			pstmt.setString(3, member.getBirthday());
-			pstmt.setString(4, member.getAddress());
-			pstmt.setString(5, member.getTel());
-			pstmt.setString(6, member.getId());
+			pstmt = conn.prepareStatement("update customer SET customer_pw=?, customer_name=?, "
+					+ "customer_birth=?, customer_tel=?  WHERE customer_id=?");
+			pstmt.setString(1, customer.getCustomer_pw());
+			pstmt.setString(2, customer.getCustomer_name());
+			pstmt.setInt(3, customer.getCustomer_birth());
+			pstmt.setInt(4, customer.getCustomer_tel());
+			pstmt.setString(5, customer.getCustomer_id());
 			pstmt.executeUpdate();
 			x = 1;
 
 			return x;
-
+			
 		} catch (Exception sqle) {
 			sqle.printStackTrace();
 			throw new RuntimeException(sqle.getMessage());
@@ -101,7 +102,7 @@ public class LogonDBBean {
 				throw new RuntimeException(e.getMessage());
 			}
 		}
-	} // end updateMember
+	} // end updatecustomer
 
 	public int deleteMember(String id, String pw) throws Exception {
 		Connection conn = null;
@@ -116,17 +117,17 @@ public class LogonDBBean {
 			conn = getConnection();
 
 			// 1. 아이디에 해당하는 비밀번호를 조회한다.
-			pstmt = conn.prepareStatement("SELECT passwd FROM member WHERE ID=?");
+			pstmt = conn.prepareStatement("SELECT Customer_pw FROM customer WHERE Customer_ID=?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				dbpw = rs.getString("passwd");
+				dbpw = rs.getString("Customer_pw");
 
 				if (dbpw.equals(pw)) // 입력된 비밀번호와 DB비번 비교
 				{
 					// 같을경우 회원삭제 진행
-					pstmt = conn.prepareStatement("DELETE FROM member WHERE ID=?");
+					pstmt = conn.prepareStatement("DELETE FROM CUSTOMER WHERE Customer_ID=?");
 					pstmt.setString(1, id);
 					pstmt.executeUpdate();
 					x = 1; // 삭제 성공
@@ -158,7 +159,7 @@ public class LogonDBBean {
 				throw new RuntimeException(e.getMessage());
 			}
 		}
-	} // end deleteMember
+	} // end deletecustomer
 
 	public LogonDataBean getUserInfo(String id) {
 		Connection conn = null;
@@ -169,7 +170,7 @@ public class LogonDBBean {
 		try {
 			// 쿼리
 			conn = getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM MEMBER WHERE ID=?");
+			pstmt = conn.prepareStatement("SELECT * FROM CUSTOMER WHERE Customer_ID=?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
@@ -177,15 +178,15 @@ public class LogonDBBean {
 			{
 				// 자바빈에 정보를 담는다.
 				logondata = new LogonDataBean();
-				logondata.setId(rs.getString("id"));
-				logondata.setPasswd(rs.getString("passwd"));
-				logondata.setName(rs.getString("name"));
-				logondata.setBirthday(rs.getString("birthday"));
-				logondata.setAddress(rs.getString("address"));
-				logondata.setTel(rs.getString("tel"));
+				logondata.setCustomer_id(rs.getString("customer_id"));
+				logondata.setCustomer_pw(rs.getString("customer_pw"));
+				logondata.setCustomer_name(rs.getString("customer_name"));
+				logondata.setCustomer_birth(rs.getInt("customer_birth"));
+				logondata.setCustomer_tel(rs.getInt("customer_tel"));
+				logondata.setCustomer_point(rs.getInt("customer_point"));
+				logondata.setCustomer_count(rs.getInt("customer_count"));
 
 			}
-
 			return logondata;
 
 		} catch (Exception sqle) {
@@ -207,7 +208,7 @@ public class LogonDBBean {
 		}
 	} // end getUserInfo
 
-	public int userCheck(String id, String passwd) throws Exception {
+	public int userCheck(String customer_id, String customer_pw) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -217,13 +218,13 @@ public class LogonDBBean {
 		try {
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("select passwd from MEMBER where id = ?");
-			pstmt.setString(1, id);
+			pstmt = conn.prepareStatement("select customer_pw from customer where customer_id = ?");
+			pstmt.setString(1, customer_id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				dbpasswd = rs.getString("passwd");
-				if (dbpasswd.equals(passwd))
+				dbpasswd = rs.getString("customer_pw");
+				if (dbpasswd.equals(customer_pw))
 					x = 1; // 인증 성공
 				else
 					x = 0; // 비밀번호 틀림
@@ -252,43 +253,7 @@ public class LogonDBBean {
 		return x;
 	}
 
-	public void insertMovie(MovieDataBean movie) throws Exception {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		// 아이디 패스워드 이름 생년월일 주소 전화번호
-
-		try {
-			conn = getConnection();
-
-			pstmt = conn.prepareStatement("insert into movie values(?, ?, ?, ?, ?, ?, ?, ?)");
-			pstmt.setString(1, movie.getMovie_id());
-			pstmt.setString(2, movie.getMovie_title());
-			pstmt.setString(3, movie.getMovie_director());
-			pstmt.setString(4, movie.getMovie_actor());
-			pstmt.setString(5, movie.getMovie_rating());
-			pstmt.setString(6, movie.getMovie_info());
-			pstmt.setInt(7, movie.getMovie_reservation_rate());
-			pstmt.setInt(8, movie.getMovie_runtime());
-			pstmt.setInt(9, movie.getTheater_num());
-			pstmt.setString(9, movie.getTheater_date());
-			pstmt.executeUpdate();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException ex) {
-				}
-		}
-	}
-	
 	public void nullvoid() {
-		
+
 	}
 }

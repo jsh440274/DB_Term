@@ -39,13 +39,13 @@
 	<form method="post" action="cookieLogout.jsp">
 		<input type="submit" value="로그아웃">
 	</form>
-	<form method="post" action="MemberUpdateForm.jsp">
+	<form method="post" action="CustomerUpdateForm.jsp">
 		<input type="submit" value="정보수정">
 	</form>
-	<form method="post" action="MemberDeleteForm.jsp">
+	<form method="post" action="CustomerDeleteForm.jsp">
 		<input type="submit" value="탈퇴신청">
 	</form>
-	<form method="post" action="Movie.jsp">
+	<form method="post" action="CinemaForm.jsp">
 		<input type="submit" value="영화예매하러가기">
 	</form>
 </body>

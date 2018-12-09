@@ -18,16 +18,14 @@ LogonDataBean logondata = logon.getUserInfo(id);
 
 <h2>회원정보수정</h2>
 
-    <form method="post" action="MemberUpdatePro.jsp">
-                  아이디: <input type="text" name="id" value=<%=logondata.getId()%> maxlength="12"><br/>
-		패스워드 : <input type="password" name="passwd" value=<%=logondata.getPasswd() %> maxlength="12"><br/>
-		이름 : <input type="text" name="name"value=<%=logondata.getName() %> maxlength="10"><br/>
-		생일 : <input type="text" name="birthday" value=<%=logondata.getBirthday() %> maxlength="10"><br/>
-		주소 : <input type="text" name="address" value=<%=logondata.getAddress() %> maxlength="10"><br/>
-		번호 : <input type="text" name="tel" value=<%=logondata.getTel() %> maxlength="10"><br/>
+    <form method="post" action="CustomerUpdatePro.jsp">
+                  아이디: <input type="text" name="customer_id" value=<%=logondata.getCustomer_id()%> ><br/>
+		패스워드 : <input type="password" name="customer_pw" value=<%=logondata.getCustomer_pw() %>><br/>
+		이름 : <input type="text" name="customer_name"value=<%=logondata.getCustomer_name() %> ><br/>
+		생일(INT) : <input type="text" name="customer_birth" value=<%=logondata.getCustomer_birth() %>><br/>
+		번호(INT) : <input type="text" name="customer_tel" value=<%=logondata.getCustomer_tel() %>><br/>
         <input type="submit" value="정보변경">
         <input type="button" value="취소"  onclick="location.href='cookieMain.jsp'">
     </form>
-
 </body>
 </html>

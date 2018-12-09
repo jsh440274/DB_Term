@@ -3,15 +3,15 @@
 <%@ page import="login.LogonDBBean"%>
 <% request.setCharacterEncoding("euc-kr");%>
 <%
- String id = request.getParameter("id");
- String passwd  = request.getParameter("passwd");
+ String customer_id = request.getParameter("customer_id");
+ String customer_pw  = request.getParameter("customer_pw");
  
  LogonDBBean logon = LogonDBBean.getInstance();
-    int check= logon.userCheck(id,passwd);
+    int check= logon.userCheck(customer_id,customer_pw);
 
  if(check==1){
-  session.setAttribute("sessionID", id);
-  Cookie cookie = new Cookie("id", id);
+  session.setAttribute("sessionID", customer_id);
+  Cookie cookie = new Cookie("id", customer_id);
   cookie.setMaxAge(20*60);
   response.addCookie(cookie);
   response.sendRedirect("cookieMain.jsp");
@@ -27,4 +27,6 @@
    alert("아이디가 맞지 않습니다..");
    history.go(-1);
  </script>
-<%} %>
+<%
+} 
+%>

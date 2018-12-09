@@ -11,6 +11,7 @@ String id = session.getAttribute("movie_id").toString();
 MovieDBBean movie_update = MovieDBBean.getInstance();
 MovieDataBean moviedata = movie_update.getUserInfo(id);
 %>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 

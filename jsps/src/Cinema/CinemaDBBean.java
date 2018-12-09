@@ -16,7 +16,7 @@ public class CinemaDBBean {
 	}
 
 	// DB Connect Class 파일
-	private Connection getConnection() throws Exception {
+	public Connection getConnection() throws Exception {
 		Connection conn = null;
 
 		String jdbcUrl = "jdbc:mysql://localhost:3306/jspdatabase";
@@ -68,7 +68,6 @@ public class CinemaDBBean {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
 					"UPDATE cinema SET cinema_address=?, cinema_tel=?, cinema_count=? WHERE cinema_name=?");
-			// pstmt.setString(1, cinema.getCinema_name());
 			pstmt.setString(1, cinema.getCinema_address());
 			pstmt.setInt(2, cinema.getCinema_tel());
 			pstmt.setInt(3, cinema.getCinema_count());

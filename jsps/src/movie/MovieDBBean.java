@@ -1,9 +1,11 @@
 package movie;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MovieDBBean {
 
+	public ArrayList<String> names = new ArrayList<>();
 	private static MovieDBBean instance = new MovieDBBean();
 
 	public static MovieDBBean getInstance() {
@@ -14,7 +16,7 @@ public class MovieDBBean {
 	}
 
 	// DB Connect Class 파일
-	private Connection getConnection() throws Exception {
+	public Connection getConnection() throws Exception {
 		Connection conn = null;
 
 		String jdbcUrl = "jdbc:mysql://localhost:3306/jspdatabase";
@@ -28,7 +30,7 @@ public class MovieDBBean {
 
 	// MemberDAO.java
 
-	public int userCheck(String id, String passwd) throws Exception {
+	public int userCheck(String movie_id, String movie_title) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -38,13 +40,13 @@ public class MovieDBBean {
 		try {
 			conn = getConnection();
 
-			pstmt = conn.prepareStatement("select passwd from MEMBER where id = ?");
-			pstmt.setString(1, id);
+			pstmt = conn.prepareStatement("select movie_title from movie where id = ?");
+			pstmt.setString(1, movie_id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				dbpasswd = rs.getString("passwd");
-				if (dbpasswd.equals(passwd))
+				dbpasswd = rs.getString("movie_title");
+				if (dbpasswd.equals(movie_title))
 					x = 1; // 인증 성공
 				else
 					x = 0; // 비밀번호 틀림
@@ -90,8 +92,10 @@ public class MovieDBBean {
 			pstmt.setString(6, movie.getMovie_info());
 			pstmt.setInt(7, movie.getMovie_reservation_rate());
 			pstmt.setInt(8, movie.getMovie_runtime());
-			pstmt.setInt(9, movie.getTheater_num());
-			pstmt.setString(10, movie.getTheater_date());
+//			pstmt.setInt(9, movie.getTheater_num());
+//			pstmt.setString(10, movie.getTheater_date());
+			pstmt.setInt(9, 0);
+			pstmt.setString(10, null);
 			pstmt.executeUpdate();
 			
 		} catch (Exception ex) {
@@ -141,6 +145,58 @@ public class MovieDBBean {
 			}
 
 			return moviedata;
+
+		} catch (Exception sqle) {
+			throw new RuntimeException(sqle.getMessage());
+		} finally {
+			// Connection, PreparedStatement를 닫는다.
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+					pstmt = null;
+				}
+				if (conn != null) {
+					conn.close();
+					conn = null;
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	} // end getUserInfo
+	
+	public ArrayList<String> getUserInfo2() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MovieDataBean moviedata = null;
+
+		try {
+			// 쿼리
+			conn = getConnection();
+			pstmt = conn.prepareStatement("SELECT * FROM MOVIE");
+			//pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) // 회원정보를 DTO에 담는다.
+			{
+				// 자바빈에 정보를 담는다.
+				moviedata = new MovieDataBean();
+//				moviedata.setMovie_id(rs.getString("movie_id"));
+//				moviedata.setMovie_title(rs.getString("movie_title"));
+				String name = rs.getString("movie_title");
+				names.add(name);
+//				moviedata.setMovie_director(rs.getString("movie_director"));
+//				moviedata.setMovie_actor(rs.getString("movie_actor"));
+//				moviedata.setMovie_rating(rs.getString("movie_rating"));
+//				moviedata.setMovie_info(rs.getString("movie_info"));
+//				moviedata.setMovie_reservation_rate(rs.getInt("movie_reservation_rate"));
+//				moviedata.setMovie_runtime(rs.getInt("movie_runtime"));
+//				moviedata.setTheater_num(rs.getInt("theater_num"));
+//				moviedata.setTheater_date(rs.getString("theater_date"));
+
+			}
+			return names;
 
 		} catch (Exception sqle) {
 			throw new RuntimeException(sqle.getMessage());
@@ -262,53 +318,4 @@ public class MovieDBBean {
 		}
 	} // end updateMember
 
-//	public MovieDataBean getUserInfo1(String id) {
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		MovieDataBean moviedata = null;
-//
-//		try {
-//			// 쿼리
-//			conn = getConnection();
-//			pstmt = conn.prepareStatement("SELECT * FROM movie WHERE movie_id=?");
-//			pstmt.setString(1, id);
-//			rs = pstmt.executeQuery();
-//
-//			if (rs.next()) // 회원정보를 DTO에 담는다.
-//			{
-//				// 자바빈에 정보를 담는다.
-//				moviedata = new MovieDataBean();
-//				moviedata.setMovie_id(rs.getString("movie_id"));
-//				moviedata.setMovie_title(rs.getString("movie_title"));
-//				moviedata.setMovie_director(rs.getString("movie_director"));
-//				moviedata.setMovie_actor(rs.getString("movie_actor"));
-//				moviedata.setMovie_rating(rs.getString("movie_rating"));
-//				moviedata.setMovie_info(rs.getString("movie_info"));
-//				moviedata.setMovie_reservation_rate(rs.getInt("movie_reservation_rate"));
-//				moviedata.setMovie_runtime(rs.getInt("movie_runtime"));
-//				moviedata.setTheater_num(rs.getInt("theater_num"));
-//				moviedata.setTheater_date(rs.getString("theater_date"));
-//			}
-//
-//			return moviedata;
-//
-//		} catch (Exception sqle) {
-//			throw new RuntimeException(sqle.getMessage());
-//		} finally {
-//			// Connection, PreparedStatement를 닫는다.
-//			try {
-//				if (pstmt != null) {
-//					pstmt.close();
-//					pstmt = null;
-//				}
-//				if (conn != null) {
-//					conn.close();
-//					conn = null;
-//				}
-//			} catch (Exception e) {
-//				throw new RuntimeException(e.getMessage());
-//			}
-//		}
-//	} // end getUserInfo
 }

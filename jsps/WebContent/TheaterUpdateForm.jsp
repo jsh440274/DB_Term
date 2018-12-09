@@ -7,6 +7,8 @@
 <html>
 <head>
 <%
+//int num =((Integer)(session.getAttribute("theater_num"))).intValue();
+
 int num =((Integer)(session.getAttribute("theater_num"))).intValue();
 TheaterDBBean theater_update = TheaterDBBean.getInstance();
 TheaterDataBean theaterdata = theater_update.getUserInfo(num);

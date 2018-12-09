@@ -1,10 +1,12 @@
 package Theater;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Seating.SeatingDataBean;
 
 import Cinema.CinemaDataBean;
 
@@ -20,7 +22,7 @@ public class TheaterDBBean {
 	}
 
 	// DB Connect Class 파일
-	private Connection getConnection() throws Exception {
+	public Connection getConnection() throws Exception {
 		Connection conn = null;
 
 		String jdbcUrl = "jdbc:mysql://localhost:3306/jspdatabase";
@@ -46,6 +48,7 @@ public class TheaterDBBean {
 			pstmt.setInt(3, theater.getTheater_seating_capacity());
 			pstmt.setString(4, theater.getCinema_name());
 			pstmt.executeUpdate();
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -61,6 +64,37 @@ public class TheaterDBBean {
 				}
 		}
 
+	}
+
+	public void insertSeating(SeatingDataBean seating, TheaterDataBean theater) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		// 아이디 패스워드 이름 생년월일 주소 전화번호
+		try {
+			conn = getConnection();
+			for (int i = 0; i < 30; i++) {
+				pstmt = conn.prepareStatement("insert into seating values(?, ?, ?, ?)");
+				pstmt.setInt(1, i);
+				pstmt.setInt(2, 0);
+				pstmt.setInt(3, theater.getTheater_num());
+				pstmt.setString(4, theater.getTheater_date());
+				pstmt.executeUpdate();
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+		}
 	}
 
 	public int updateTheater(TheaterDataBean theater, int theater_num) throws Exception {

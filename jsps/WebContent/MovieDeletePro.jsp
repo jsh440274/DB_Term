@@ -19,7 +19,7 @@
 
 	if (check == 1) {
 %>
-<jsp:getProperty property="id" name="movie" />를 삭제했습니다.
+<jsp:getProperty property="movie_id" name="movie" />를 삭제했습니다.
 <form method="post">
 	<input type="button" value="영화등록화면으로 이동하기"
 		onclick="location.href='MovieEnrollForm.jsp'">
