@@ -96,65 +96,6 @@ public class CinemaDBBean {
 		}
 	} // end updatecinema
 
-	// public int deleteCinema(String cinema_name, String cinema_address) throws
-	// Exception {
-	// Connection conn = null;
-	// PreparedStatement pstmt = null;
-	// ResultSet rs = null;
-	//
-	// String db_address = ""; // DB상의 비밀번호를 담아둘 변수
-	//
-	// int x = -1;
-	//
-	// try {
-	// conn = getConnection();
-	//
-	// // 1. 아이디에 해당하는 비밀번호를 조회한다.
-	// pstmt = conn.prepareStatement("SELECT cinema_address FROM cinema WHERE
-	// cinema_name=?");
-	// pstmt.setString(1, cinema_name);
-	// rs = pstmt.executeQuery();
-	//
-	// if (rs.next()) {
-	// db_address = rs.getString("cinema_address");
-	//
-	// if (db_address.equals(cinema_address)) // 입력된 비밀번호와 DB비번 비교
-	// {
-	// // 같을경우 회원삭제 진행
-	// pstmt = conn.prepareStatement("DELETE FROM cinema WHERE cinema_name=?");
-	// pstmt.setString(1, cinema_name);
-	// pstmt.executeUpdate();
-	// x = 1; // 삭제 성공
-	// } else {
-	// x = 0; // 비밀번호 비교결과 - 다름
-	// }
-	// }
-	//
-	// return x;
-	//
-	// } catch (Exception sqle) {
-	// try {
-	// conn.rollback(); // 오류시 롤백
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	// throw new RuntimeException(sqle.getMessage());
-	// } finally {
-	// try {
-	// if (pstmt != null) {
-	// pstmt.close();
-	// pstmt = null;
-	// }
-	// if (conn != null) {
-	// conn.close();
-	// conn = null;
-	// }
-	// } catch (Exception e) {
-	// throw new RuntimeException(e.getMessage());
-	// }
-	// }
-	// } // end deletecinema
-
 	public int deleteCinema(String cinema_name) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

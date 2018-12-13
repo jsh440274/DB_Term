@@ -16,7 +16,6 @@
 		출연 : <input type="text" name="movie_actor" ><br/>
 		등급 : <input type="text" name="movie_rating" ><br/>
 		주요정보 : <input type="text" name="movie_info" ><br/>
-		예매율(숫자) : <input type="text" name="movie_reservation_rate"><br/>
 		러닝타임(숫자) : <input type="text" name="movie_runtime"><br/>
 		상영관번호(숫자) : <input type="text" name="theater_num"><br/>
 		상영일정 : <input type="text" name="theater_date"><br/>

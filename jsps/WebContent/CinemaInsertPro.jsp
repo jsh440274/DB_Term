@@ -19,6 +19,6 @@ cinema_enroll.insertCinema(cinema);
 
 <jsp:getProperty property="cinema_name" name="cinema" /> 영화관이 등록되었습니다.
 <form method="post">
-	<input type="button" value="영화관등록화면으로 이동하기"
-		onclick="location.href='CinemaInsertForm.jsp'">
+	<input type="button" value="극장 틍록으로 이동하기"
+		onclick="location.href='TheaterInsertForm.jsp'">
 </form>

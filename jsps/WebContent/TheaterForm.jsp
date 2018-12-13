@@ -34,13 +34,13 @@
 					try {
 						conn = theater_show.getConnection();
 						pstmt = conn.prepareStatement("SELECT * FROM theater");
-						String query = "select theater_num, theater_date from theater";
+						String query = "select m.movie_title, t.theater_num, t.theater_date from theater t, movie m where m.theater_date=t.theater_date order by m.movie_reservation_rate desc";
 						Statement statement = conn.createStatement();
 						rs = statement.executeQuery(query);
 						while (rs.next()) {
-							out.println("<input type=\"radio\" name=\"theater\" value = \""
-									+ rs.getString("theater_num") + ",");
-							out.println(rs.getString("theater_date") + "\"><br>");
+							out.println("<input type=\"radio\" name=\"theater\" value = \""+ rs.getString("theater_num") + ",");
+							out.println(rs.getString("theater_date") +","+rs.getString("movie_title")+ "\"><br>");
+							out.println("영화제목 : " + rs.getString("movie_title")+" </br> ");
 							out.println("상영관 번호  : " + rs.getString("theater_num") + "  </br> ");
 							out.println("상영 시작 시간  (YYMMDDhhmm) : " + rs.getString("theater_date") + "</br>");
 				%>

@@ -11,13 +11,14 @@
 </jsp:useBean>
 
 <%
-	String id = request.getParameter("movie_id");
+	String id = request.getParameter("movie_id").toString();
 	session.setAttribute("movie_id", id);
+	String movie_title = request.getParameter("movie_title");
 	MovieDBBean movie_enroll = MovieDBBean.getInstance();
 	movie_enroll.insertMovie(movie);
 %>
-
-<jsp:getProperty property="movie_id" name="movie" />의 영화가 등록되었습니다.
+영화제목은 <%out.println(movie_title); %>입니다.
+상영관 번호는<jsp:getProperty property="theater_num" name="movie" />번 입니다.
 <form method="post">
 	<input type="button" value="영화등록으로 이동하기"
 		onclick="location.href='MovieEnrollForm.jsp'">
@@ -32,3 +33,7 @@
 	<input type="button" value="영화삭제로 이동하기"
 		onclick="location.href='MovieDeleteForm.jsp'">
 </form>
+
+<form method="post" action="cookieLogout.jsp">
+		<input type="submit" value="로그아웃">
+	</form>

@@ -22,8 +22,10 @@ String tempnum = radioValue.split(",")[0];
 int theater_num = Integer.parseInt(tempnum);
 TheaterDBBean seating_show = TheaterDBBean.getInstance();
 String theater_date = radioValue.split(",")[1];
+String movie_title = radioValue.split(",")[2];
 session.setAttribute("theater_date", theater_date);
 session.setAttribute("theater_num", theater_num);
+session.setAttribute("movie_title",movie_title);
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Movie!!!!!!!</title>
@@ -43,10 +45,9 @@ session.setAttribute("theater_num", theater_num);
 					ResultSet rs = null;
 					try {
 						conn = seating_show.getConnection();
-						pstmt = conn.prepareStatement("SELECT * FROM seating");
-						String query = "select seating_num, seating_reserved from seating";
-						Statement statement = conn.createStatement();
-						rs = statement.executeQuery(query);
+						pstmt = conn.prepareStatement("select seating_num, seating_reserved from seating where theater_num=?");
+						pstmt.setInt(1,theater_num);
+						rs = pstmt.executeQuery();
 						while (rs.next()) {
 							int seating_reserved = rs.getInt("seating_reserved");
 							int seating_num = rs.getInt("seating_num");
@@ -75,3 +76,5 @@ session.setAttribute("theater_num", theater_num);
 </body>
 </body>
 </html>
+
+

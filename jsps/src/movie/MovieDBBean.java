@@ -75,6 +75,22 @@ public class MovieDBBean {
 		return x;
 	}
 
+	public void change_reservation_rate(MovieDataBean movie, String movie_title) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn=getConnection();
+			
+			pstmt=conn.prepareStatement("update movie set movie_reservation_rate=? where movie_title=?");
+			pstmt.setInt(1, movie.getMovie_reservation_rate()+1);
+			pstmt.setString(2, movie_title);
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void insertMovie(MovieDataBean movie) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -90,12 +106,10 @@ public class MovieDBBean {
 			pstmt.setString(4, movie.getMovie_actor());
 			pstmt.setString(5, movie.getMovie_rating());
 			pstmt.setString(6, movie.getMovie_info());
-			pstmt.setInt(7, movie.getMovie_reservation_rate());
+			pstmt.setInt(7, 0);
 			pstmt.setInt(8, movie.getMovie_runtime());
-//			pstmt.setInt(9, movie.getTheater_num());
-//			pstmt.setString(10, movie.getTheater_date());
-			pstmt.setInt(9, 0);
-			pstmt.setString(10, null);
+			pstmt.setInt(9, movie.getTheater_num());
+			pstmt.setString(10, movie.getTheater_date());
 			pstmt.executeUpdate();
 			
 		} catch (Exception ex) {

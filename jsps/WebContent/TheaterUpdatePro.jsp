@@ -22,8 +22,7 @@
 	if(check ==1) {
 %>
 
-<jsp:getProperty property="theater_num" name="theater" />의 상영관정보가
-수정되었습니다.
+<jsp:getProperty property="theater_num" name="theater" />의 상영관정보가 수정되었습니다.
 <form method="post">
 	<input type="button" value="theater 업데이트화면으로 이동하기"
 		onclick="location.href='TheaterUpdateForm.jsp'">

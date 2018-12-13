@@ -21,11 +21,17 @@
 //session.setAttribute("theater_date", date);
 TheaterDBBean theater_enroll = TheaterDBBean.getInstance();
 theater_enroll.insertTheater(theater);
-theater_enroll.insertSeating(seating, theater);
+int theater_num = Integer.parseInt(request.getParameter("theater_num"));
+theater_enroll.insertSeating(seating, theater, theater_num);
 %>
 
 <jsp:getProperty property="theater_num" name="theater" /> 번 상영관이 등록되었습니다.
 <form method="post">
-	<input type="button" value="상영관등록화면으로 이동하기"
+	<input type="button" value="상영관등록으로 이동하기"
 		onclick="location.href='TheaterInsertForm.jsp'">
+</form>
+
+<form method="post">
+	<input type="button" value="영화등록으로 이동하기"
+		onclick="location.href='MovieEnrollForm.jsp'">
 </form>

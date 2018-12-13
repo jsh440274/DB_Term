@@ -66,7 +66,7 @@ public class TheaterDBBean {
 
 	}
 
-	public void insertSeating(SeatingDataBean seating, TheaterDataBean theater) throws Exception {
+	public void insertSeating(SeatingDataBean seating, TheaterDataBean theater, int theater_num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		// 아이디 패스워드 이름 생년월일 주소 전화번호
@@ -76,7 +76,7 @@ public class TheaterDBBean {
 				pstmt = conn.prepareStatement("insert into seating values(?, ?, ?, ?)");
 				pstmt.setInt(1, i);
 				pstmt.setInt(2, 0);
-				pstmt.setInt(3, theater.getTheater_num());
+				pstmt.setInt(3, theater_num);
 				pstmt.setString(4, theater.getTheater_date());
 				pstmt.executeUpdate();
 			}

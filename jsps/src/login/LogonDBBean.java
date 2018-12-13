@@ -16,7 +16,7 @@ public class LogonDBBean {
 	}
 
 	// DB Connect Class 파일
-	private Connection getConnection() throws Exception {
+	public Connection getConnection() throws Exception {
 		Connection conn = null;
 
 		String jdbcUrl = "jdbc:mysql://localhost:3306/jspdatabase";
@@ -104,6 +104,19 @@ public class LogonDBBean {
 		}
 	} // end updatecustomer
 
+	public void update_point(LogonDataBean customer, String customer_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn=getConnection();
+			pstmt = conn.prepareStatement("update customer set customer_point=?, customer_count=? where customer_id=?");
+			pstmt.setInt(1, customer.getCustomer_point()+10);
+			pstmt.setInt(2, customer.getCustomer_count()+1);
+			pstmt.setString(3, customer_id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public int deleteMember(String id, String pw) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

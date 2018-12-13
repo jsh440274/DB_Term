@@ -17,8 +17,12 @@
 
 			else if (id.equals("admin")) {
 %>
-<form method="post" action="MovieEnrollForm.jsp">
-	<input type="submit" value="영화등록하기">
+<form method="post" action="CinemaInsertForm.jsp">
+	<input type="submit" value="cinema 등록하기">
+</form>
+
+<form method="post" action="SelectVIP.jsp">
+	<input type="submit" value="VIP 확인하기">
 </form>
 <%
 	}

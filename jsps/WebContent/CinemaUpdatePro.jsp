@@ -12,7 +12,6 @@
 </jsp:useBean>
 
 <%
-	//String id = request.getParameter("id");
 	String id= (String)session.getAttribute("cinema_name"); 
 	CinemaDBBean cinemadata = CinemaDBBean.getInstance();
 	int check = cinemadata.updateCinema(cinema, id);
